@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>شایان عمروالعلایی - طراح وب حرفه‌ای و هکر کلاه خاکستری | Web Designer & Grey Hat Hacker</title>
     
-    <!-- SEO Meta Tags -->
     <meta name="description" content="شایان عمروالعلایی - طراح وب حرفه‌ای و هکر کلاه خاکستری با بیش از 5 سال تجربه. متخصص در طراحی وبسایت‌های مدرن GitLab و برنده مسابقات FIRA.">
     <meta name="keywords" content="طراح وب, هکر کلاه خاکستری, امنیت سایبری, تست نفوذ, طراحی وبسایت, UI/UX, React, HTML , Python, شایان عمروالعلایی, web designer, grey hat hacker, cybersecurity, penetration testing">
     <meta name="author" content="شایان عمروالعلایی">
@@ -19,28 +18,17 @@
     <meta property="og:title" content="شایان عمروالعلایی - طراح وب حرفه‌ای و هکر کلاه خاکستری">
     <meta property="og:description" content="طراح وب حرفه‌ای و هکر کلاه خاکستری با بیش از 5 سال تجربه در طراحی وبسایت‌های مدرن">
     <meta property="og:type" content="website">
-    <!-- <meta property="og:url" content="https://shayanalaee.ir">
-    <meta property="og:image" content="https://shayanalaee.ir"> -->
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:site_name" content="شایان عمروالعلایی">
     <meta property="og:locale" content="fa_IR">
     
-    <!-- Twitter Card Meta Tags
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="شایان عمروالعلایی - طراح وب حرفه‌ای و هکر کلاه خاکستری">
-    <meta name="twitter:description" content="طراح وب حرفه‌ای و هکر کلاه خاکستری با بیش از ۲ سال تجربه در طراحی وبسایت‌های مدرن و امنیت سایبری">
-    <meta name="twitter:image" content="https://parsa-khanjani.com/twitter-image.jpg">
-    <meta name="twitter:creator" content="@parsa_khanjani"> -->
-    
-    <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#6366f1">
     <meta name="msapplication-TileColor" content="#6366f1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content=" ">
     
-    <!-- Advanced SEO Meta Tags -->
     <meta name="geo.region" content="IR-07">
     <meta name="geo.placename" content="Tehran">
     <meta name="geo.position" content="35.6892;51.3890">
@@ -296,6 +284,23 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+            cursor: none; /* Hide default cursor */
+        }
+        
+        #custom-cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #6366f1;
+            border-radius: 50%;
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            transition: transform 0.1s ease-out, width 0.2s ease, height 0.2s ease;
+            z-index: 9999;
+        }
+
+        #custom-cursor.hover {
+            transform: translate(-50%, -50%) scale(1.5);
         }
         
         :root {
@@ -783,6 +788,7 @@
     </style>
 </head>
 <body class="text-white" data-theme="dark">
+    <div id="custom-cursor"></div>
     <div class="fixed inset-0 pointer-events-none z-0" id="particles"></div>
 
     <nav class="fixed top-0 w-full nav-glass z-50 transition-all duration-300">
@@ -841,8 +847,6 @@
         <div class="container mx-auto px-4 lg:px-6 text-center relative z-10">
             <div class="fade-in-up">
                 <div class="w-32 h-32 lg:w-40 lg:h-40 mx-auto mb-6 relative">
-                    <!-- <div class="w-full h-full rounded-full glass-card p-1"> -->
-                        <!-- <img src="https://via.placeholder.com/200x200/6366f1/ffffff?text=P" alt=" " class="w-full h-full rounded-full object-cover"> -->
                     </div>
                     <div class="absolute -top-2 -right-2 w-6 h-6 bg-gray-500 rounded-full animate-ping"></div>
                     <div class="absolute -bottom-2 -left-2 w-4 h-4 bg-gray-500 rounded-full animate-bounce"></div>
@@ -1171,7 +1175,6 @@
         </h2>
 
         <div class="max-w-4xl mx-auto space-y-8">
-            <!-- Web Developer -->
             <div class="glass-card p-6 rounded-xl fade-in-left">
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                     <div>
@@ -1206,7 +1209,6 @@
                 </ul>
             </div>
 
-            <!-- Cybersecurity (Lightly) -->
             <div class="glass-card p-6 rounded-xl fade-in-right">
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                     <div>
@@ -1686,6 +1688,25 @@
                 return false;
             });
         }
+        
+        // Custom cursor logic
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', e => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mouseover', e => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                cursor.classList.add('hover');
+            }
+        });
+
+        document.addEventListener('mouseout', e => {
+            if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON' || e.target.closest('a') || e.target.closest('button')) {
+                cursor.classList.remove('hover');
+            }
+        });
 
         document.addEventListener('DOMContentLoaded', () => {
             createParticles();

@@ -1,3 +1,0 @@
-# shaw
-moshakhasat shaw
-

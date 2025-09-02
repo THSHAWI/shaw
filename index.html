@@ -105,8 +105,6 @@
             "jobTitle": ["Web Designer", "Grey Hat Hacker", "Cybersecurity Specialist", "Frontend Developer", "UI/UX Designer"],
             "description": "طراح وب حرفه‌ای و هکر کلاه سفید با بیش از ۲ سال تجربه در طراحی وبسایت‌های مدرن و امنیت سایبری",
             "url": "https://thshawi.github.io/shaw/",
-
-            },
             "email": "alaeeshayan@gmail.com",
             "telephone": "+98-998-103-5814",
             "birthPlace": {
@@ -136,7 +134,6 @@
                 "Cybersecurity",
                 "Ethical Hacking",
                 "Penetration Testing",
-                "Vulnerability Assessment",
                 "JavaScript",
                 "Vue.js",
                 "Python",
@@ -159,12 +156,6 @@
                 }
             ],
             "award": [
-                {
-                    "@type": "Award",
-                    "name": "GitLab Critical Vulnerability Discovery",
-                    "description": "Discovered and responsibly disclosed critical Account Takeover vulnerability",
-                    "url": "https://hackerone.com/reports/2293343"
-                },
                 {
                     "@type": "Award",
                     "name": "FIRA Competition National First Place",
@@ -235,7 +226,7 @@
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
             "name": "خدمات طراحی وب و امنیت سایبری",
-            "description": "ارائه خدمات حرفه‌ای طراحی وب، توسعه فرانت‌اند و مشاوره امنیت سایبری",
+            "description": "ارائه خدمات حرفه‌ای طراحی وب, توسعه فرانت‌اند و مشاوره امنیت سایبری",
             "provider": {
                 "@type": "Person",
                 "name": "شایان عمروالعلایی"
@@ -262,6 +253,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        html, body {
+            overflow-x: hidden;
+        }
         * {
             font-family: 'Vazirmatn', sans-serif;
             -webkit-user-select: none;
@@ -467,8 +461,7 @@
         }
         
         [data-theme="light"] #mobile-menu {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
         }
         
         [data-theme="light"] #mobile-menu a {
@@ -477,7 +470,6 @@
         
         body {
             background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
-            overflow-x: hidden;
         }
         
         .hero-bg {
@@ -718,6 +710,12 @@
         }
         
         @media (max-width: 768px) {
+            body {
+                cursor: auto;
+            }
+            #custom-cursor {
+                display: none;
+            }
             .hero-bg {
                 min-height: 100vh;
             }
@@ -778,6 +776,33 @@
                 opacity: 0;
             }
         }
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.95);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            z-index: 100;
+        }
+        #mobile-menu.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1);
+        }
+        #close-menu {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem; /* Changed from float-left */
+        }
     </style>
 </head>
 <body class="text-white" data-theme="dark">
@@ -789,7 +814,6 @@
             <div class="flex justify-between items-center">
                 <div class="text-xl font-bold gradient-text">
                     <i class="fas fa-code ml-2"></i>
-                     
                 </div>
                 <div class="hidden lg:flex items-center space-x-8 space-x-reverse">
                     <a href="#home" class="nav-link hover:text-gray-400">خانه</a>
@@ -816,19 +840,17 @@
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed top-0 right-0 w-80 h-full bg-slate-900 bg-opacity-95 backdrop-blur-lg transform translate-x-full transition-transform duration-300 z-50 lg:hidden">
-        <div class="p-6">
-            <button id="close-menu" class="text-2xl mb-8 float-left text-gray-400">
-                <i class="fas fa-times"></i>
-            </button>
-            <div class="clear-both space-y-6 mt-12">
-                <a href="#home" class="block py-3 text-lg hover:text-gray-400 transition-colors">خانه</a>
-                <a href="#about" class="block py-3 text-lg hover:text-gray-400 transition-colors">درباره من</a>
-                <a href="#skills" class="block py-3 text-lg hover:text-gray-400 transition-colors">مهارت‌ها</a>
-                <a href="#experience" class="block py-3 text-lg hover:text-gray-400 transition-colors">تجربیات</a>
-                <a href="#projects" class="block py-3 text-lg hover:text-gray-400 transition-colors">پروژه‌ها</a>
-                <a href="#contact" class="block py-3 text-lg hover:text-gray-400 transition-colors">تماس</a>
-            </div>
+    <div id="mobile-menu" class="lg:hidden">
+        <button id="close-menu" class="text-2xl text-gray-400">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="space-y-6 text-center">
+            <a href="#home" class="block py-3 text-2xl hover:text-gray-400 transition-colors">خانه</a>
+            <a href="#about" class="block py-3 text-2xl hover:text-gray-400 transition-colors">درباره من</a>
+            <a href="#skills" class="block py-3 text-2xl hover:text-gray-400 transition-colors">مهارت‌ها</a>
+            <a href="#experience" class="block py-3 text-2xl hover:text-gray-400 transition-colors">تجربیات</a>
+            <a href="#projects" class="block py-3 text-2xl hover:text-gray-400 transition-colors">پروژه‌ها</a>
+            <a href="#contact" class="block py-3 text-2xl hover:text-gray-400 transition-colors">تماس</a>
         </div>
     </div>
 
@@ -920,13 +942,12 @@
                 <div class="fade-in-right">
                     <div class="space-y-4 text-base leading-relaxed">
                         <p class="text-gray-300">
-                            سلام! من شایان عمروالعلایی هستم، یک <span class="text-gray-400 font-semibold">طراح وب حرفه‌ای</span> و <span class="text-gray-400 font-semibold"></span> با بیش از 5 سال تجربه.
+                            سلام! من شایان عمروالعلایی هستم، یک <span class="text-gray-400 font-semibold">طراح و توسعه‌دهنده وب</span> با بیش از 5 سال تجربه در خلق وب‌سایت‌های خلاقانه و کاربرپسند.
                         </p>
                         
                         <p class="text-gray-300">
-                            تخصص اصلی من در <span class="text-gray-400 font-semibold">طراحی و توسعه وبسایت‌های مدرن</span> است. وبسایت‌هایی که نه تنها زیبا و کاربردی هستند، بلکه از نظر امنیتی نیز در بالاترین سطح قرار دارند.
+                            تخصص اصلی من در <span class="text-gray-400 font-semibold">طراحی رابط کاربری (UI/UX)</span> و پیاده‌سازی وب‌سایت‌های مدرن با تمرکز بر تجربه کاربری است. همچنین در زمینه مدیریت سرور، هاستینگ و بازارهای مالی دیجیتال (ارز دیجیتال) فعالیت دارم.
                         </p>
-                        
                     </div>
 
                     <div class="grid grid-cols-2 gap-4 mt-8">
@@ -976,15 +997,6 @@
                     </div>
                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">Responsive Design</span>
-                            <span class="text-indigo-400 text-sm">94%</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-bar" style="width: 94%;"></div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-4 rounded-lg">
-                        <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-sm">UI/UX Design</span>
                             <span class="text-indigo-400 text-sm">90%</span>
                         </div>
@@ -995,28 +1007,28 @@
                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-sm">CSS</span>
-                            <span class="text-cyan-400 text-sm">50%</span>
+                            <span class="text-indigo-400 text-sm">90%</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 50%;"></div>
+                            <div class="skill-bar" style="width: 90%;"></div>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">Node.js/Express</span>
-                            <span class="text-cyan-400 text-sm">12%</span>
+                            <span class="font-semibold text-sm">Responsive Design</span>
+                            <span class="text-indigo-400 text-sm">90%</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 12%;"></div>
+                            <div class="skill-bar" style="width: 90%;"></div>
                         </div>
                     </div>
                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">React/Vue.js</span>
-                            <span class="text-cyan-400 text-sm">7%</span>
+                            <span class="font-semibold text-sm">PHP</span>
+                            <span class="text-cyan-400 text-sm">80%</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 7%;"></div>
+                            <div class="skill-bar" style="width: 80%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1057,6 +1069,15 @@
                     </div>
                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
+                            <span class="font-semibold text-sm">PHP</span>
+                            <span class="text-cyan-400 text-sm">80%</span>
+                        </div>
+                        <div class="skill-progress">
+                            <div class="skill-bar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                    <div class="glass-card p-4 rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-sm">SQL/Database</span>
                             <span class="text-cyan-400 text-sm">64%</span>
                         </div>
@@ -1064,31 +1085,13 @@
                             <div class="skill-bar" style="width: 64%;"></div>
                         </div>
                     </div>
-                    <div class="glass-card p-4 rounded-lg">
+                     <div class="glass-card p-4 rounded-lg">
                         <div class="flex justify-between items-center mb-2">
                             <span class="font-semibold text-sm">Linux</span>
-                            <span class="text-cyan-400 text-sm">50%</span>
+                            <span class="text-cyan-400 text-sm">45%</span>
                         </div>
                         <div class="skill-progress">
-                            <div class="skill-bar" style="width: 50%;"></div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-4 rounded-lg">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">C/C++</span>
-                            <span class="text-indigo-400 text-sm">12%</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-bar" style="width: 12%;"></div>
-                        </div>
-                    </div>
-                    <div class="glass-card p-4 rounded-lg">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">PHP</span>
-                            <span class="text-cyan-400 text-sm">1%</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-bar" style="width: 1%;"></div>
+                            <div class="skill-bar" style="width: 45%;"></div>
                         </div>
                     </div>
                 </div>
@@ -1145,15 +1148,6 @@
                             <div class="skill-bar" style="width: 15%;"></div>
                         </div>
                     </div>
-                    <div class="glass-card p-4 rounded-lg">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="font-semibold text-sm">Vulnerability Research</span>
-                            <span class="text-indigo-400 text-sm">5%</span>
-                        </div>
-                        <div class="skill-progress">
-                            <div class="skill-bar" style="width: 5%;"></div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -1173,9 +1167,9 @@
                     <div>
                         <h3 class="text-xl lg:text-2xl font-bold mb-1 text-indigo-400">
                             <i class="fas fa-laptop-code ml-2"></i>
-                            توسعه‌دهنده وب و بک‌اند
+                            طراح و توسعه‌دهنده ارشد وب
                         </h3>
-                        <p class="text-gray-400 text-sm">طراحی سیستم‌های پیشرفته با Python و توسعه وبسایت‌های حرفه‌ای</p>
+                        <p class="text-gray-400 text-sm">متخصص در طراحی رابط کاربری و مدیریت سرورهای هاستینگ</p>
                     </div>
                     <div class="text-gray-500 mt-2 lg:mt-0 text-sm">
                         <i class="fas fa-calendar-alt ml-2"></i>
@@ -1185,19 +1179,19 @@
                 <ul class="text-gray-300 space-y-2 text-sm">
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-indigo-400 mt-1 ml-3 text-xs"></i>
-                        بیش از ۵ سال تجربه برنامه‌نویسی حرفه‌ای با Python
+                        طراحی و پیاده‌سازی بیش از ۵۰ وب‌سایت حرفه‌ای با تمرکز بر UI/UX.
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-indigo-400 mt-1 ml-3 text-xs"></i>
-                        ساخت وبسایت‌های مدرن، ریسپانسیو و بهینه‌سازی شده
+                        بهینه‌سازی وب‌سایت‌ها برای موتورهای جستجو (SEO) و افزایش سرعت بارگذاری.
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-indigo-400 mt-1 ml-3 text-xs"></i>
-                        پیاده‌سازی سیستم‌های سمت سرور
+                        مدیریت و کانفیگ حرفه‌ای سرورهای لینوکسی و خدمات هاستینگ (VPS).
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-indigo-400 mt-1 ml-3 text-xs"></i>
-                        مدیریت حرفه‌ای سرورهای هاستینگ
+                        ارائه مشاوره فنی به مشتریان برای انتخاب بهترین راهکارهای دیجیتال.
                     </li>
                 </ul>
             </div>
@@ -1206,35 +1200,34 @@
                 <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between mb-4">
                     <div>
                         <h3 class="text-xl lg:text-2xl font-bold mb-1 text-teal-400">
-                            <i class="fas fa-user-shield ml-2"></i>
-                            علاقه‌مند به امنیت سایبری
+                            <i class="fas fa-chart-line ml-2"></i>
+                            مدیریت و مشاوره در بازارهای دیجیتال
                         </h3>
-                        <p class="text-gray-400 text-sm">مطالعه و تست امنیت در کنار توسعه نرم‌افزار</p>
+                        <p class="text-gray-400 text-sm">فعال در زمینه فروش، مدیریت پروژه و مشاوره ارز دیجیتال</p>
                     </div>
                     <div class="text-gray-500 mt-2 lg:mt-0 text-sm">
                         <i class="fas fa-calendar-alt ml-2"></i>
-                        2025 - اکنون
+                        2022 - اکنون
                     </div>
                 </div>
                 <ul class="text-gray-300 space-y-2 text-sm">
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-teal-400 mt-1 ml-3 text-xs"></i>
-                        آشنایی با اصول امنیت وب و تحلیل آسیب‌پذیری‌ها
+                        تجربه موفق در فروش خدمات دیجیتال و مدیریت ارتباط با مشتریان.
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-teal-400 mt-1 ml-3 text-xs"></i>
-                        تست امنیتی ابتدایی برای پروژه‌های شخصی و تیمی
+                        ارائه مشاوره تخصصی در زمینه سرمایه‌گذاری و فعالیت در بازار ارزهای دیجیتال.
                     </li>
                     <li class="flex items-start">
                         <i class="fas fa-chevron-left text-teal-400 mt-1 ml-3 text-xs"></i>
-                        یادگیری مفاهیم امنیت به عنوان مکمل برنامه‌نویسی بک‌اند
+                        مدیریت و اجرای پروژه‌های فروش آنلاین، از جمله فروش اکانت‌های پرمیوم و خدمات مرتبط.
                     </li>
                 </ul>
             </div>
         </div>
     </div>
 </section>
-
 
 <section id="projects" class="py-16 lg:py-24 relative">
     <div class="container mx-auto px-4 lg:px-6">
@@ -1245,8 +1238,10 @@
 
         <div class="grid lg:grid-cols-2 gap-8">
 
-
             <div class="glass-card p-6 rounded-xl fade-in-left">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-trophy text-3xl text-yellow-500"></i>
@@ -1266,8 +1261,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-right">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-trophy text-3xl text-gray-400"></i>
@@ -1287,8 +1284,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-left">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-trophy text-3xl text-yellow-300"></i>
@@ -1308,8 +1307,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-right">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-robot text-3xl text-blue-400"></i>
@@ -1329,8 +1330,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-left">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-globe-americas text-3xl text-green-400"></i>
@@ -1350,8 +1353,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-right">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-globe-asia text-3xl text-red-500"></i>
@@ -1367,8 +1372,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-left">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-microchip text-3xl text-purple-400"></i>
@@ -1388,8 +1395,10 @@
                 </div>
             </div>
 
-
             <div class="glass-card p-6 rounded-xl fade-in-right">
+                 <div class="mb-4 bg-slate-800/50 border border-slate-700 rounded-lg p-4 flex items-center justify-center h-48">
+                    <span class="text-slate-500 text-sm">محل قرارگیری تصویر گواهی</span>
+                </div>
                 <div class="text-center mb-4">
                     <div class="w-16 h-16 mx-auto mb-3 rounded-full glass-card flex items-center justify-center">
                         <i class="fas fa-flag text-3xl text-orange-400"></i>
@@ -1441,15 +1450,18 @@
                         <a href="tel:9981266740" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm">
                             9999876949 98+
                         </a>
+                         <a href="tel:+989981035814" class="text-gray-400 hover:text-cyan-400 transition-colors text-sm block mt-2">
+                            +98 998 103 5814
+                        </a>
                     </div>
                 </div>
 
                 <div class="glass-card p-8 rounded-xl text-center fade-in-up mt-8">
                     <h3 class="text-xl font-semibold mb-6">راه های ارتباطی</h3>
                     <div class="flex justify-center items-center space-x-8 space-x-reverse">
-                        <a href="https://shayanalaee.ir" target="_blank" class="group">
+                        <a href="https://thshawi.github.io/shaw/" target="_blank" class="group">
                             <div class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                                <i class="fab fa-linkedin text-2xl text-white"></i>
+                                <i class="fas fa-globe text-2xl text-white"></i>
                             </div>
                             <p class="text-sm text-gray-400 mt-2 group-hover:text-blue-400 transition-colors">Site</p>
                         </a>
@@ -1549,19 +1561,19 @@
         const closeMenuBtn = document.getElementById('close-menu');
 
         mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('translate-x-full');
+            mobileMenu.classList.add('active');
             mobileMenuBtn.classList.add('active');
         });
 
         closeMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.add('translate-x-full');
+            mobileMenu.classList.remove('active');
             mobileMenuBtn.classList.remove('active');
         });
 
         const mobileLinks = mobileMenu.querySelectorAll('a');
         mobileLinks.forEach(link => {
             link.addEventListener('click', () => {
-                mobileMenu.classList.add('translate-x-full');
+                mobileMenu.classList.remove('active');
                 mobileMenuBtn.classList.remove('active');
             });
         });
@@ -1712,5 +1724,5 @@
             }
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9663b265958fa009',t:'MTc1MzY5ODU4MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
